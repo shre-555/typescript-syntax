@@ -3,21 +3,29 @@ import ply.lex as lex
 # List of token names.   This is always required
 tokens = (
    'NUMBER',
-   'PLUS',
-   'MINUS',
-   'TIMES',
-   'DIVIDE',
-   'LPAREN',
-   'RPAREN',
+   'SELECTION_STATEMENTS',
+   'VARIABLE_DECLARATION_STATEMENT', #var,let,const
+   'VARIABLE_NAME',
+   'VARIABLE_TYPE',
+   'EQUAL',
+   'TYPE_DECLARATOR',
+   'PUNCTUATOR',
+   'LSQUARE',
+   'RSQUARE',
+   'KEYWORDS'
 )
 
 # Regular expression rules for simple tokens
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
+t_EQUAL   = r'='
+t_LSQUARE  = r'\['
+t_RSQUARE  = r'\]'
+t_TYPE_DECLARATOR= r':'
+t_PUNCTUATOR= r'(;|")'
+t_SELECTION_STATEMENTS = r'(else if | if | else)'
+t_VARIABLE_DECLARATION_STATEMENT=r'(let | const)'
+t_VARIABLE_NAME= r'(([A-Za-z_]+[0-9]*)+)'
+t_VARIABLE_TYPE=r'(number|string|boolean|object)'
+# t_KEYWORDS= 
 
 # A regular expression rule with some action code
 def t_NUMBER(t):
@@ -44,8 +52,8 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-3 + 4 * 10
-  + -20 *2
+if let 5
+const b: string = "abc";
 '''
 
 # Give the lexer some input
