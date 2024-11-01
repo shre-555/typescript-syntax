@@ -31,10 +31,10 @@ def t_STRING(t):
     return t
 
 #t_KEYWORDS = r'\b(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield)\b'
-t_SELECTION_STATEMENTS = r'\b(if|else)\b'
+t_SELECTION_STATEMENTS = r'\b(else\sif|if|else)\b'
 t_VARIABLE_TYPE = r'\b(number|string|boolean|object)\b'
-t_VARIABLE_DECLARATION_STATEMENT = r'\b(let|const)\b'
-t_VARIABLE_NAME = r'(?!(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield)\b)[a-zA-Z_$][a-zA-Z0-9_$]*'
+t_VARIABLE_DECLARATION_STATEMENT = r'\b(let|const|var)\b'
+t_VARIABLE_NAME = r'(?!(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield | number|string|boolean|object)\b)[a-zA-Z_$][a-zA-Z0-9_$]*'
 t_RELATIONAL_OPERATOR = r'(===|==|>=|<=|!=|!|>|<|&&|\|\|)'
 t_PUNCTUATOR = r';'
 t_EQUAL = r'='
@@ -64,10 +64,9 @@ def t_error(t):
 lexer = lex.lex()
 
 
-# Test it out
+# #Test it out
 # data = '''
-# if (5!="5" || 4)  //hello
-# const b: string = "abc";
+# let abc : number = 5;
 # '''
 
 # # Give the lexer some input
