@@ -13,7 +13,9 @@ def p_statement_list(p):
 def p_statement(p):
     '''statement : selection_statement
                  | variable_declaration_statement
-                 | expression_statement'''
+                 | expression_statement
+                 | array_declaration_statement
+                 '''
     pass
 
 # Variable declaration (e.g., const x: string = "hello";
@@ -42,6 +44,12 @@ def p_expression(p):
                   | LPAREN expression RPAREN'''
     pass
 
+# Array declaration
+def p_array_declaration_statement(p):
+    '''array_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE PUNCTUATOR
+    '''
+    pass
+
 # Error rule for syntax errors
 def p_error(p):
     if p:
@@ -57,7 +65,7 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-if (5 != "5" || 4)
+var array_name:number[];
 '''
 
 # Parse the input
