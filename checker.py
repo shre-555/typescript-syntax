@@ -45,6 +45,7 @@ t_RPAREN = r'\)'
 t_LCURLY = r'\{'
 t_RCURLY = r'\}'
 t_TYPE_DECLARATOR = r':'
+t_ignore_COMMENT = r'//.*'
 
 # Track line numbers
 def t_newline(t):
@@ -64,7 +65,7 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-if (5!='5' || 4)
+if (5!="5" || 4)  //hello
 const b: string = "abc";
 '''
 
