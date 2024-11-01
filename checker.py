@@ -11,9 +11,14 @@ tokens = (
     'PUNCTUATOR',
     'LSQUARE',
     'RSQUARE',
+    'LPAREN',
+    'RPAREN',
+    'LCURLY',
+    'RCURLY',
     'KEYWORDS',
     'VARIABLE_NAME',
-    'STRING'
+    'STRING',
+    'RELATIONAL_OPERATOR'
 )
 
 # Regular expression rules for tokens
@@ -26,14 +31,19 @@ def t_STRING(t):
     r'\"([^\\\"]|\\.)*\"' #quotation marks should have starting and ending
     return t
 
-t_SELECTION_STATEMENTS = r'\b(else if|if|else)\b'
+t_SELECTION_STATEMENTS = r'\b(if|else)\b'
 t_VARIABLE_TYPE = r'\b(number|string|boolean|object)\b'
 t_VARIABLE_DECLARATION_STATEMENT = r'\b(let|const)\b'
-t_VARIABLE_NAME = r'(?!(if|else|let|const|number|string|boolean|object)\b)[a-zA-Z_][a-zA-Z0-9_]*'
+t_VARIABLE_NAME = r'(?!(if|else|let|const)\b)[a-zA-Z_][a-zA-Z0-9_]*'
+t_RELATIONAL_OPERATOR = r'(===|==|>=|<=|!=|!|>|<|&&|\|\|)'
 t_PUNCTUATOR = r';'
 t_EQUAL = r'='
 t_LSQUARE = r'\['
 t_RSQUARE = r'\]'
+t_LPAREN = r'\('
+t_RPAREN = r'\)'
+t_LCURLY = r'\{'
+t_RCURLY = r'\}'
 t_TYPE_DECLARATOR = r':'
 t_KEYWORDS = r'\b(return|function|for|while|do|break|continue)\b'
 
@@ -55,7 +65,7 @@ lexer = lex.lex()
 
 # Test it out
 data = '''
-if let 5
+if (5!='5' || 4)
 const b: string = "abc";
 '''
 
