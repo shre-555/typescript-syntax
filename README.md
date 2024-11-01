@@ -7,4 +7,4 @@ Identifies and Validates following constructs:
 
 ## To Do
 - Reserved keywords
-- Curly
+- '' in string, eg: a = 'o'
