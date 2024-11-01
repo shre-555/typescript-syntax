@@ -63,18 +63,19 @@ def t_error(t):
 # Build the lexer
 lexer = lex.lex()
 
+
 # Test it out
-data = '''
-if (5!="5" || 4)  //hello
-const b: string = "abc";
-'''
+# data = '''
+# if (5!="5" || 4)  //hello
+# const b: string = "abc";
+# '''
 
-# Give the lexer some input
-lexer.input(data)
+# # Give the lexer some input
+# lexer.input(data)
 
-# Tokenize
-while True:
-    tok = lexer.token()
-    if not tok: 
-        break      # No more input
-    print(tok)
+# # Tokenize
+# while True:
+#     tok = lexer.token()
+#     if not tok: 
+#         break      # No more input
+#     print(tok)

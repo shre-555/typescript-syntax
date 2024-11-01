@@ -1,6 +1,8 @@
 import ply.yacc as yacc
 from checker import tokens
 
+no_of_syntax_errors=0
+
 # Start symbol
 def p_statement_list(p):
     '''statement_list : statement_list statement
@@ -44,18 +46,25 @@ def p_expression(p):
 def p_error(p):
     if p:
         print(f"Syntax error at token '{p.type}' (value: '{p.value}') on line {p.lineno}")
+        global no_of_syntax_errors
+        no_of_syntax_errors+=1
     else:
-        print("Syntax error at EOF")
+        pass
+        # "Syntax error at EOF"
 
 # Build the parser
 parser = yacc.yacc()
 
 # Test input
 data = '''
-let a = 3;
 if (5 != "5" || 4)
 '''
 
 # Parse the input
 result = parser.parse(data)
-print("sucecc")
+
+
+if no_of_syntax_errors:
+    print(no_of_syntax_errors, "syntax errors found")
+else:
+    print("No syntax errors found")
