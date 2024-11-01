@@ -1,6 +1,6 @@
 import ply.lex as lex
 
-# List of token names.   This is always required
+# List of token names.   
 tokens = (
     'NUMBER',
     'SELECTION_STATEMENTS',
@@ -15,7 +15,6 @@ tokens = (
     'RPAREN',
     'LCURLY',
     'RCURLY',
-    'KEYWORDS',
     'VARIABLE_NAME',
     'STRING',
     'RELATIONAL_OPERATOR'
@@ -31,10 +30,11 @@ def t_STRING(t):
     r'\"([^\\\"]|\\.)*\"' #quotation marks should have starting and ending
     return t
 
+#t_KEYWORDS = r'\b(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield)\b'
 t_SELECTION_STATEMENTS = r'\b(if|else)\b'
 t_VARIABLE_TYPE = r'\b(number|string|boolean|object)\b'
 t_VARIABLE_DECLARATION_STATEMENT = r'\b(let|const)\b'
-t_VARIABLE_NAME = r'(?!(if|else|let|const)\b)[a-zA-Z_][a-zA-Z0-9_]*'
+t_VARIABLE_NAME = r'(?!(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield)\b)[a-zA-Z_$][a-zA-Z0-9_$]*'
 t_RELATIONAL_OPERATOR = r'(===|==|>=|<=|!=|!|>|<|&&|\|\|)'
 t_PUNCTUATOR = r';'
 t_EQUAL = r'='
@@ -45,7 +45,6 @@ t_RPAREN = r'\)'
 t_LCURLY = r'\{'
 t_RCURLY = r'\}'
 t_TYPE_DECLARATOR = r':'
-t_KEYWORDS = r'\b(return|function|for|while|do|break|continue)\b'
 
 # Track line numbers
 def t_newline(t):
