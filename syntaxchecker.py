@@ -26,7 +26,9 @@ def p_variable_declaration_statement(p):
 # Selection statement (if, if-else)
 def p_selection_statement(p):
     '''selection_statement : SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY
-                           | SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS LCURLY statement_list RCURLY'''
+                           | SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS LCURLY statement_list RCURLY
+                           | SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS LCURLY statement_list RCURLY
+                           '''
     pass
 
 # Expressions
@@ -65,7 +67,14 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-var array_name:number[];
+if(5>6)
+{
+66;
+}
+else if(8>9)
+{
+55;
+}
 '''
 
 # Parse the input
