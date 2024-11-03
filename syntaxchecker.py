@@ -33,10 +33,15 @@ def p_variable_declaration_statement(p):
 def p_selection_statement(p):
     '''selection_statement : SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY
                            | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
-                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY
-                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY elseif_statement
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY elseif_statement SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
                            '''
     pass
+
+def p_elseif_statement(p):
+    '''elseif_statement : SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY
+                        | SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY elseif_statement
+    '''
 
 # Expressions
 def p_expression_statement(p):
@@ -81,10 +86,13 @@ else if(9)
 {
 9>8;
 }
-else if(9)
+else if(10)
 {
 4<0;
 }
+else if(10)
+{
+5>0}
 else
 '''
 
