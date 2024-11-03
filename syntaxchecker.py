@@ -20,7 +20,13 @@ def p_statement(p):
 
 # Variable declaration (e.g., const x: string = "hello";
 def p_variable_declaration_statement(p):
-    '''variable_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE PUNCTUATOR'''
+    '''variable_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE PUNCTUATOR
+                                        | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME PUNCTUATOR
+                                        | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME EQUAL expression PUNCTUATOR 
+                                        | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE EQUAL expression PUNCTUATOR 
+                                        | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE EQUAL expression PUNCTUATOR
+                                        | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME EQUAL expression PUNCTUATOR
+                                        '''
     pass
 
 # Selection statement (if, if-else)
@@ -67,7 +73,11 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-a:number;
+const a=5;
+const a:number=5;
+var a;
+let a:number=5;
+let b number;
 '''
 
 # Parse the input
