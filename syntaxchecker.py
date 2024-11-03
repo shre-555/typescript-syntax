@@ -20,14 +20,15 @@ def p_statement(p):
 
 # Variable declaration (e.g., const x: string = "hello";
 def p_variable_declaration_statement(p):
-    '''variable_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE EQUAL expression PUNCTUATOR'''
+    '''variable_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE PUNCTUATOR'''
     pass
 
 # Selection statement (if, if-else)
 def p_selection_statement(p):
-    '''selection_statement : SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY
-                           | SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS LCURLY statement_list RCURLY
-                           | SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS LCURLY statement_list RCURLY
+    '''selection_statement : SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
                            '''
     pass
 
@@ -42,7 +43,6 @@ def p_expression(p):
                   | VARIABLE_NAME
                   | STRING
                   | expression RELATIONAL_OPERATOR expression
-                  | expression EQUAL expression
                   | LPAREN expression RPAREN'''
     pass
 
@@ -67,14 +67,7 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-if(5>6)
-{
-66;
-}
-else if(8>9)
-{
-55;
-}
+a:number;
 '''
 
 # Parse the input

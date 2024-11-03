@@ -3,7 +3,11 @@ import ply.lex as lex
 # List of token names.   
 tokens = (
     'NUMBER',
-    'SELECTION_STATEMENTS',
+    'SELECTION_STATEMENTS_IF',
+    'SELECTION_STATEMENTS_ELSE',
+    'SELECTION_STATEMENTS_ELSEIF',
+    'SELECTION_STATEMENTS_SWITCH',
+    'SELECTION_STATEMENTS_CASE',
     'VARIABLE_DECLARATION_STATEMENT', # var, let, const
     'VARIABLE_TYPE',
     'EQUAL',
@@ -31,7 +35,11 @@ def t_STRING(t):
     return t
 
 #t_KEYWORDS = r'\b(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield)\b'
-t_SELECTION_STATEMENTS = r'\b(else\sif|if|else)\b'
+t_SELECTION_STATEMENTS_IF = r'\b(if)\b' #\b to avoid cases where it detectes if within another word like stiff
+t_SELECTION_STATEMENTS_ELSE = r'\b(else)\b'
+t_SELECTION_STATEMENTS_ELSEIF = r'\b(else\sif)\b'
+t_SELECTION_STATEMENTS_SWITCH = r'\b(switch)\b'
+t_SELECTION_STATEMENTS_CASE = r'\b(case)\b'
 t_VARIABLE_TYPE = r'\b(number|string|boolean|object)\b'
 t_VARIABLE_DECLARATION_STATEMENT = r'\b(let|const|var)\b'
 t_VARIABLE_NAME = r'(?!(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield | number|string|boolean|object)\b)[a-zA-Z_$][a-zA-Z0-9_$]*'
