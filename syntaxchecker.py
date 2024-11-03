@@ -73,11 +73,19 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-const a=5;
-const a:number=5;
-var a;
-let a:number=5;
-let b number;
+if(9)
+{
+0>9;
+}
+else if(9)
+{
+9>8;
+}
+else if(9)
+{
+4<0;
+}
+else
 '''
 
 # Parse the input

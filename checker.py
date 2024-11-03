@@ -36,7 +36,7 @@ def t_STRING(t):
 #t_KEYWORDS = r'\b(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield)\b'
 t_SELECTION_STATEMENTS_IF = r'\b(if)\b' #\b to avoid cases where it detectes if within another word like stiff
 t_SELECTION_STATEMENTS_ELSE = r'\b(else)\b'
-t_SELECTION_STATEMENTS_ELSEIF = r'\b(else\sif)\b'
+t_SELECTION_STATEMENTS_ELSEIF = r'\b(else\s+if)\b'
 t_VARIABLE_TYPE = r'\b(number|string|boolean|object)\b'
 t_VARIABLE_DECLARATION_STATEMENT = r'\b(let|var)\b'
 t_VARIABLE_DECLARATION_STATEMENT_CONST = r'\b(const)\b'
