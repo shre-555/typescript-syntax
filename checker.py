@@ -12,6 +12,7 @@ tokens = (
     'EQUAL',
     'TYPE_DECLARATOR',
     'PUNCTUATOR',
+    'COMMA',
     'LSQUARE',
     'RSQUARE',
     'LPAREN',
@@ -43,6 +44,7 @@ t_VARIABLE_DECLARATION_STATEMENT_CONST = r'\b(const)\b'
 t_VARIABLE_NAME = r'(?!(await | break | case | catch | class | const | continue | debugger | default | delete | do | else | enum | export | extends | false | final | finally | for | function | if | implements | import | in | instanceof | interface | let | new | null | package | private | protected | public | return | super | switch | this | throw | true | try | typeof | var | void | while | with | yield | number|string|boolean|object)\b)[a-zA-Z_$][a-zA-Z0-9_$]*'
 t_RELATIONAL_OPERATOR = r'(===|==|>=|<=|!=|!|>|<|&&|\|\|)'
 t_PUNCTUATOR = r';'
+t_COMMA= r','
 t_EQUAL = r'='
 t_LSQUARE = r'\['
 t_RSQUARE = r'\]'

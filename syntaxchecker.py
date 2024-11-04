@@ -60,6 +60,18 @@ def p_expression(p):
 # Array declaration
 def p_array_declaration_statement(p):
     '''array_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE PUNCTUATOR
+                                    | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
+                                    | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
+                                    | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
+                                    | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
+    '''
+    pass
+
+def p_array_elements(p):
+    '''array_elements : NUMBER COMMA array_elements
+                    | STRING COMMA array_elements
+                    | NUMBER
+                    | STRING
     '''
     pass
 
@@ -78,22 +90,11 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-if(9)
-{
-0>9;
-}
-else if(9)
-{
-9>8;
-}
-else if(10)
-{
-4<0;
-}
-else if(10)
-{
-5>0}
-else
+let arr:number[]=[1,2,3,4];
+let arr2=[1,2,3];
+let arr3:number[]=[1,2,3,4];
+let arr:number[];
+const arr:number[]=[1,2,3];
 '''
 
 # Parse the input
