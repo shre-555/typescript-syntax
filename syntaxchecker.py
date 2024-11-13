@@ -1,5 +1,6 @@
 import ply.yacc as yacc
 from checker import tokens
+import sys
 
 no_of_syntax_errors=0
 
@@ -89,13 +90,15 @@ def p_error(p):
 parser = yacc.yacc()
 
 # Test input
-data = '''
-let arr:number[]=[1,2,3,4];
-let arr2=[1,2,3];
-let arr3:number[]=[1,2,3,4];
-let arr:number[];
-const arr:number[]=[1,2,3];
-'''
+# data = '''
+# let arr:number[]=[1,2,3,4];
+# let arr2=[1,2,3];
+# let arr3:number[]=[1,2,3,4];
+# let arr:number[];
+# const arr:number[]={1,2,3};
+# '''
+
+data = sys.stdin.read()  # Read until EOF (Ctrl+Z and then enter)
 
 # Parse the input
 result = parser.parse(data)
