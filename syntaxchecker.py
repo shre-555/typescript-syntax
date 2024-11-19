@@ -126,10 +126,21 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
+if (a>9) {
+    if (5==0) {
+    } else {
+    }
+} else if (b!="quit" || b!="exit") {
+    const CONSTANT_NUMBER = 10;
+} else if (b=="ok") {
+    let status_code: number = 200;
+} else { 
+    
+}
+var arr;
+let a, b: string, c; 
+var a:number, someString: string = "hello", p = 100;
 var array_name:string[]=[5];
-const _values:number[]=[1,2,3];
-const arr: string[] = ["hi","hello"];
-var arr
 '''
 
 # data = sys.stdin.read()  # Read until EOF (Ctrl+Z and then enter)
