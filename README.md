@@ -36,6 +36,12 @@ var name:string = "mary"
 var name:string;
 var name = "mary"
 var name;
+let a,b:number;
+let a:string,b:number;
+let a="hi",b:number=10;
+let a="hi",b=10;
+const pi = PI = 3;
+
 
 ## Array Declaration
 var array_name:data type[]
