@@ -21,14 +21,26 @@ def p_statement(p):
 
 # Variable declaration (e.g., const x: string = "hello";
 def p_variable_declaration_statement(p):
-    '''variable_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE PUNCTUATOR
-                                        | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME PUNCTUATOR
-                                        | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME EQUAL expression PUNCTUATOR 
-                                        | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE EQUAL expression PUNCTUATOR 
-                                        | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE EQUAL expression PUNCTUATOR
-                                        | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME EQUAL expression PUNCTUATOR
+    '''variable_declaration_statement : VARIABLE_DECLARATION_STATEMENT variable_declaration PUNCTUATOR
+                                        | VARIABLE_DECLARATION_STATEMENT_CONST variable_initialization PUNCTUATOR
                                         '''
     pass
+
+def p_variable_declaration(p):
+    '''variable_declaration : VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE
+                                | VARIABLE_NAME
+                                | variable_initialization 
+                                | variable_declaration COMMA variable_declaration
+                                '''
+    pass
+
+def p_variable_initialization(p):
+    '''variable_initialization : VARIABLE_NAME EQUAL expression 
+                                | VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE EQUAL expression
+                                | variable_initialization COMMA variable_initialization '''
+    pass
+
+
 
 # Selection statement (if, if-else)
 def p_selection_statement(p):
@@ -102,20 +114,17 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-let arr:number[]=[1,2,3,4];
-let arr2: sstring=[1,2,3];
-let arr3:number[]=[1,2,3,4];
-let arr:number[];
-if (9>0) {
-  if (8<6) {
-  }
-  else{
-  0;
-  }
-}
-else{
-0;
-}
+var name:string = "mary";
+var name:string;
+var name = "mary";
+var name;
+let a,b:number;
+let a:string="HI",b:number=9,c=10,d:string="bye",e:number,f:string="abc";
+let a:number, b:string="hi";
+let a="hi",b:number=10;
+let a="hi",b=10;
+const a: number = 6, b = 2;
+let a="hi",b:number;
 '''
 
 # data = sys.stdin.read()  # Read until EOF (Ctrl+Z and then enter)
