@@ -29,8 +29,8 @@ def p_variable_declaration_statement(p):
 def p_variable_declaration(p):
     '''variable_declaration : VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE
                                 | VARIABLE_NAME
-                                | variable_initialization 
-                                | variable_declaration COMMA variable_declaration
+                                | variable_declaration COMMA variable_declaration 
+                                | variable_initialization
                                 '''
     pass
 
@@ -83,13 +83,25 @@ def p_expression(p):
 
 # Array declaration
 def p_array_declaration_statement(p):
-    '''array_declaration_statement : VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE PUNCTUATOR
-                                    | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
-                                    | VARIABLE_DECLARATION_STATEMENT VARIABLE_NAME EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
-                                    | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
-                                    | VARIABLE_DECLARATION_STATEMENT_CONST VARIABLE_NAME EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
+    '''array_declaration_statement : VARIABLE_DECLARATION_STATEMENT array_declaration PUNCTUATOR
+                                    | VARIABLE_DECLARATION_STATEMENT_CONST array_initialization PUNCTUATOR
+                            '''
+    pass
+
+def p_array_declaration(p):
+    '''array_declaration : VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE PUNCTUATOR
+                            | array_declaration COMMA array_declaration
+                            | array_initialization
     '''
     pass
+
+def p_array_initialization(p):
+    '''array_initialization : VARIABLE_NAME TYPE_DECLARATOR VARIABLE_TYPE LSQUARE RSQUARE EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
+                            | VARIABLE_NAME EQUAL LSQUARE array_elements RSQUARE PUNCTUATOR
+                            | array_initialization COMMA array_initialization 
+    '''
+    pass
+
 
 def p_array_elements(p):
     '''array_elements : NUMBER COMMA array_elements
@@ -114,17 +126,10 @@ parser = yacc.yacc()
 
 # Test input
 data = '''
-var name:string = "mary";
-var name:string;
-var name = "mary";
-var name;
-let a,b:number;
-let a:string="HI",b:number=9,c=10,d:string="bye",e:number,f:string="abc";
-let a:number, b:string="hi";
-let a="hi",b:number=10;
-let a="hi",b=10;
-const a: number = 6, b = 2;
-let a="hi",b:number;
+var array_name:string[]=[5];
+const _values:number[]=[1,2,3];
+const arr: string[] = ["hi","hello"];
+var arr
 '''
 
 # data = sys.stdin.read()  # Read until EOF (Ctrl+Z and then enter)
