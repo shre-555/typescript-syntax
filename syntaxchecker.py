@@ -33,15 +33,25 @@ def p_variable_declaration_statement(p):
 # Selection statement (if, if-else)
 def p_selection_statement(p):
     '''selection_statement : SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY
+                            |  SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY RCURLY
                            | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY RCURLY SELECTION_STATEMENTS_ELSE LCURLY RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY SELECTION_STATEMENTS_ELSE LCURLY RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY RCURLY SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
                            | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY elseif_statement
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY RCURLY elseif_statement
                            | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY elseif_statement SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY RCURLY elseif_statement SELECTION_STATEMENTS_ELSE LCURLY RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY statement_list RCURLY elseif_statement SELECTION_STATEMENTS_ELSE LCURLY RCURLY
+                           | SELECTION_STATEMENTS_IF LPAREN expression RPAREN LCURLY RCURLY elseif_statement SELECTION_STATEMENTS_ELSE LCURLY statement_list RCURLY
                            '''
     pass
 
 def p_elseif_statement(p):
     '''elseif_statement : SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY
+                        | SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY RCURLY
                         | SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY statement_list RCURLY elseif_statement
+                        | SELECTION_STATEMENTS_ELSEIF LPAREN expression RPAREN LCURLY RCURLY elseif_statement
     '''
 
 # Expressions
@@ -56,6 +66,7 @@ def p_expression(p):
                   | STRING
                   | expression RELATIONAL_OPERATOR expression
                   | LPAREN expression RPAREN'''
+                    
     pass
 
 # Array declaration
@@ -90,15 +101,24 @@ def p_error(p):
 parser = yacc.yacc()
 
 # Test input
-# data = '''
-# let arr:number[]=[1,2,3,4];
-# let arr2=[1,2,3];
-# let arr3:number[]=[1,2,3,4];
-# let arr:number[];
-# const arr:number[]={1,2,3};
-# '''
+data = '''
+let arr:number[]=[1,2,3,4];
+let arr2: sstring=[1,2,3];
+let arr3:number[]=[1,2,3,4];
+let arr:number[];
+if (9>0) {
+  if (8<6) {
+  }
+  else{
+  0;
+  }
+}
+else{
+0;
+}
+'''
 
-data = sys.stdin.read()  # Read until EOF (Ctrl+Z and then enter)
+# data = sys.stdin.read()  # Read until EOF (Ctrl+Z and then enter)
 
 # Parse the input
 result = parser.parse(data)
